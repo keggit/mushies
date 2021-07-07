@@ -27,7 +27,7 @@ class KnownView extends StatelessWidget {
       itemCount: mushrooms.length,
       itemBuilder: (context, index) {
         final mushroom = mushrooms.elementAt(mushrooms.length - index - 1);
-        return ObservationSliver(mushroom);
+        return ObservationSliver(mushroom, mushrooms.length - index - 1);
       },
     );
   }

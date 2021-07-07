@@ -8,33 +8,51 @@ import 'display-image.dart';
 import 'observations.dart';
 
 class FullView extends StatelessWidget {
-  final note;
+  final index;
 
-  FullView(this.note);
+  FullView(this.index);
 
   @override
   Widget build(BuildContext context) {
+    final note = context.watch<Observations>().hiveObs.getAt(index);
+
     return Scaffold(
-      appBar: AppBar(title: Text(this.note.name)),
+      appBar: AppBar(title: Text(note.name)),
       body: Column(children: [
-        Text(this.note.summary != null ? this.note.summary : 'no summary'),
+        Text(note.summary != null ? note.summary : 'no summary'),
         //Text(this.note?.gillType),
         //Text(this.note?.image.path),
-        Text(this.note.timeObserved.toString()),
+        Text(note.timeObserved.toString()),
         note.imagePath == null
             ? Text("no image")
             : displayImage(note.imagePath),
-        this.note.known
+        note.known
             ? Text("this is a known observation")
             : ElevatedButton(
-                onPressed: () => addToKnown(context, this.note.key),
+                onPressed: () {
+                  context.read<Observations>().addToKnown(index);
+                },
+                //Provider.of<Observations>(context, listen: false)
+                //   .addToKnown(key), //addToKnown(context, this.note.key),
                 child: Text("add to known"),
               ),
+        ElevatedButton(
+          onPressed: () {
+            context.read<Observations>().delete(index);
+            Navigator.pop(context);
+          }, //deleteNote(context, this.note.key),
+          child: Text("delete"),
+        )
       ]),
     );
   }
-}
 
-addToKnown(BuildContext context, key) {
-  context.read<Observations>().addToKnown(key);
+  addToKnown(BuildContext context, key) {
+    context.read<Observations>().addToKnown(key);
+  }
+
+  void deleteNote(BuildContext context, key) {
+    //context.read<Observations>().delete(key);
+    Navigator.pop(context);
+  }
 }

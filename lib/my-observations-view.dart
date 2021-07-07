@@ -17,7 +17,7 @@ class MyObservationsView extends StatelessWidget {
           //display newest item first
           final note = notes.getAt(notes.length - index - 1);
           if (note != null)
-            return ObservationSliver(note);
+            return ObservationSliver(note, notes.length - index - 1);
           else
             return Text('bad juju');
         },

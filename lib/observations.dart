@@ -28,15 +28,20 @@ class Observations with ChangeNotifier, DiagnosticableTreeMixin {
     notifyListeners();
   }
 
-  void addToKnown(key) async {
-    final note = _hiveObs.get(key);
+  void addToKnown(index) async {
+    final note = _hiveObs.getAt(index);
 
     if (note != null) {
       final observation = Observation(note.name, note.timeObserved,
           imagePath: note.imagePath, known: true);
-      _hiveObs.put(key, observation);
+      _hiveObs.putAt(index, observation);
     }
 
+    notifyListeners();
+  }
+
+  void delete(index) async {
+    _hiveObs.deleteAt(index);
     notifyListeners();
   }
 }
