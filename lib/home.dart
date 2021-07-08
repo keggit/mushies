@@ -27,6 +27,7 @@ class _MyHomePageState extends State<Home> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          toolbarHeight: 50,
           bottom: TabBar(
             // indicator: BoxDecoration(color: Colors.brown[800]),
             indicatorColor: Colors.brown[800],
@@ -38,8 +39,6 @@ class _MyHomePageState extends State<Home> {
               Tab(text: 'known mushrooms')
             ],
           ),
-          title: Text(widget.title!),
-          centerTitle: true,
         ),
         body: SlidingUpPanel(
           controller: pc,
@@ -47,18 +46,14 @@ class _MyHomePageState extends State<Home> {
           panel: AddObservationSlider(pc),
           collapsed: _floatingCollapsed(pc),
           onPanelClosed: () => FocusScope.of(context).unfocus(),
-          body: Column(
-            children: <Widget>[
-              Container(
-                height: 600,
-                child: TabBarView(
-                  children: <Widget>[
-                    MyObservationsView(),
-                    KnownView(),
-                  ],
-                ),
-              ),
-            ],
+          body: Container(
+            //height: con,
+            child: TabBarView(
+              children: <Widget>[
+                MyObservationsView(),
+                KnownView(),
+              ],
+            ),
           ),
         ),
         //floatingActionButton: AddNote(),

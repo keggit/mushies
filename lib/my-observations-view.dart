@@ -16,14 +16,17 @@ class MyObservationsView extends StatelessWidget {
         crossAxisCount: 2,
         staggeredTileBuilder: (index) =>
             index == 0 ? StaggeredTile.fit(1) : const StaggeredTile.fit(1),
-        itemCount: notes.length,
+        itemCount: notes.length + 1,
         itemBuilder: (context, index) {
           //display newest item first
-          final note = notes.getAt(notes.length - index - 1);
-          if (note != null)
-            return ObservationSliver(note, notes.length - index - 1);
-          else
-            return Text('bad juju');
+          if (notes.length - index - 1 >= 0) {
+            final note = notes.getAt(notes.length - index - 1);
+            if (note != null)
+              return ObservationSliver(note, notes.length - index - 1);
+            else
+              return Container(height: 200);
+          } else
+            return Container(height: 200);
         },
       ),
     );
