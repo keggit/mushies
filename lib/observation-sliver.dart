@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../full-view.dart';
+import 'image-card.dart';
 import 'models/observation.dart';
 
 class ObservationSliver extends StatelessWidget {
@@ -67,7 +68,8 @@ class ObservationSliver extends StatelessWidget {
         },
         child: observation.imagePath == null
             ? withoutImage()
-            : withImage() /*ListTile(
+            : ImageCard(observation) //withImage()
+        /*ListTile(
               title: Text(observation.name),
               subtitle: Text(
                   "${time.year.toString()}-${time.month.toString()}-${time.day.toString()}"),

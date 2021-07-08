@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'observation-sliver.dart';
 import 'observations.dart';
@@ -11,7 +12,10 @@ class MyObservationsView extends StatelessWidget {
 
     return Container(
       // height: 500,
-      child: ListView.builder(
+      child: StaggeredGridView.countBuilder(
+        crossAxisCount: 2,
+        staggeredTileBuilder: (index) =>
+            index == 0 ? StaggeredTile.fit(1) : const StaggeredTile.fit(1),
         itemCount: notes.length,
         itemBuilder: (context, index) {
           //display newest item first
