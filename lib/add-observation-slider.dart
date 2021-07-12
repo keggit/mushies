@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:mushies_2/sliding-panel-controller.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
@@ -7,6 +8,7 @@ import 'dart:io';
 import './observations.dart';
 import 'observation-form.dart';
 import 'models/observation.dart';
+import 'get-location.dart';
 
 class AddObservationSlider extends StatefulWidget {
   AddObservationSlider(this.pc);
@@ -22,6 +24,7 @@ class _AddNoteState extends State<AddObservationSlider> {
   TextEditingController _subcontroller = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _known = false;
+  bool _location = false;
 
   String? _image;
   final picker = ImagePicker();
@@ -57,6 +60,7 @@ class _AddNoteState extends State<AddObservationSlider> {
       _controller.clear();
       _image = null;
       _known = false;
+      _location = false;
     });
   }
 
@@ -64,6 +68,29 @@ class _AddNoteState extends State<AddObservationSlider> {
     setState(() {
       _known = value!;
     });
+  }
+
+  Future<void> checkLocation(bool? value) async {
+    print('in funtion');
+    if (_location == false) {
+      print('location false');
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission != LocationPermission.denied)
+          setState(
+            () {
+              _location = value!;
+            },
+          );
+      } else {
+        setState(
+          () {
+            _location = value!;
+          },
+        );
+      }
+    }
   }
 
   @override
@@ -104,25 +131,33 @@ class _AddNoteState extends State<AddObservationSlider> {
                     maxLines: 3,
                     controller: _subcontroller,
                   ),
-                  _image == null
-                      ? Row(
-                          children: [
-                            Center(child: Text("add photo")),
-                            IconButton(
-                              icon: Icon(Icons.add_a_photo),
-                              onPressed: getImage,
+                  Row(
+                    children: [
+                      _image == null
+                          ? Row(
+                              children: [
+                                Center(child: Text("add photo")),
+                                IconButton(
+                                  icon: Icon(Icons.add_a_photo),
+                                  onPressed: getImage,
+                                ),
+                              ],
+                            )
+                          : Row(
+                              children: [
+                                Icon(Icons.check, color: Colors.green),
+                                IconButton(
+                                  icon: Icon(Icons.add_a_photo),
+                                  onPressed: getImage,
+                                ),
+                              ],
                             ),
-                          ],
-                        )
-                      : Row(
-                          children: [
-                            Icon(Icons.check, color: Colors.green),
-                            IconButton(
-                              icon: Icon(Icons.add_a_photo),
-                              onPressed: getImage,
-                            ),
-                          ],
-                        ),
+                      Text("Get Location: "),
+                      Checkbox(
+                          value: _location,
+                          onChanged: (value) => checkLocation(value)),
+                    ],
+                  ),
                   Row(
                     children: [
                       Text("Are you sure of what you found? "),
@@ -150,10 +185,23 @@ class _AddNoteState extends State<AddObservationSlider> {
                           padding: const EdgeInsets.all(12.0),
                           child: ElevatedButton(
                             child: Icon(Icons.add),
-                            onPressed: () {
-                              context.read<Observations>().addNote(
-                                  _controller.text, DateTime.now(),
-                                  image: _image, known: _known);
+                            onPressed: () async {
+                              if (_location) {
+                                Position position =
+                                    await Geolocator.getCurrentPosition(
+                                        desiredAccuracy: LocationAccuracy.high);
+                                context.read<Observations>().addNote(
+                                      _controller.text,
+                                      DateTime.now(),
+                                      image: _image,
+                                      known: _known,
+                                      latitude: position.latitude,
+                                    );
+                              } else {
+                                context.read<Observations>().addNote(
+                                    _controller.text, DateTime.now(),
+                                    image: _image, known: _known);
+                              }
                               _clear();
                               //closes the panel
                               this.widget.pc.close(); //unfocuses any text

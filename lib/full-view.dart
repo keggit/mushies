@@ -25,24 +25,34 @@ class FullView extends StatelessWidget {
         Text(note.timeObserved.toString()),
         note.imagePath == null
             ? Text("no image")
-            : displayImage(note.imagePath),
-        note.known
-            ? Text("this is a known observation")
-            : ElevatedButton(
-                onPressed: () {
-                  context.read<Observations>().addToKnown(index);
-                },
-                //Provider.of<Observations>(context, listen: false)
-                //   .addToKnown(key), //addToKnown(context, this.note.key),
-                child: Text("add to known"),
+            : Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: displayImage(note.imagePath),
               ),
-        ElevatedButton(
-          onPressed: () {
-            context.read<Observations>().delete(index);
-            Navigator.pop(context);
-          }, //deleteNote(context, this.note.key),
-          child: Text("delete"),
-        )
+        note.latitude == null
+            ? Text("no latitude")
+            : Text(note.latitude.toString()),
+        Row(
+          children: [
+            note.known
+                ? Text("this is a known observation")
+                : ElevatedButton(
+                    onPressed: () {
+                      context.read<Observations>().addToKnown(index);
+                    },
+                    //Provider.of<Observations>(context, listen: false)
+                    //   .addToKnown(key), //addToKnown(context, this.note.key),
+                    child: Text("add to known"),
+                  ),
+            ElevatedButton(
+              onPressed: () {
+                context.read<Observations>().delete(index);
+                Navigator.pop(context);
+              }, //deleteNote(context, this.note.key),
+              child: Text("delete"),
+            )
+          ],
+        ),
       ]),
     );
   }

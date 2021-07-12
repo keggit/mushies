@@ -16,9 +16,15 @@ class Observation {
   DateTime timeObserved;
   @HiveField(5)
   bool known = false;
+  @HiveField(6)
+  double? latitude;
 
   Observation(this.name, this.timeObserved,
-      {this.summary, this.gillType, this.imagePath, this.known = false});
+      {this.summary,
+      this.gillType,
+      this.imagePath,
+      this.known = false,
+      this.latitude});
 
   Map<String, dynamic> toMap() {
     return {

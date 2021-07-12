@@ -5,9 +5,11 @@
             <action android:name="android.media.action.IMAGE_CAPTURE" />
         </intent>
     </queries>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
    <application
         android:label="mushies_2"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/mushies_launcher">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

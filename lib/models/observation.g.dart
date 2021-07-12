@@ -23,13 +23,14 @@ class ObservationAdapter extends TypeAdapter<Observation> {
       gillType: fields[2] as String?,
       imagePath: fields[3] as String?,
       known: fields[5] as bool,
+      latitude: fields[6] as double?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Observation obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class ObservationAdapter extends TypeAdapter<Observation> {
       ..writeByte(4)
       ..write(obj.timeObserved)
       ..writeByte(5)
-      ..write(obj.known);
+      ..write(obj.known)
+      ..writeByte(6)
+      ..write(obj.latitude);
   }
 
   @override
