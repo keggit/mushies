@@ -34,22 +34,34 @@ class FullView extends StatelessWidget {
             : Text(note.latitude.toString()),
         Row(
           children: [
-            note.known
-                ? Text("this is a known observation")
-                : ElevatedButton(
-                    onPressed: () {
-                      context.read<Observations>().addToKnown(index);
-                    },
-                    //Provider.of<Observations>(context, listen: false)
-                    //   .addToKnown(key), //addToKnown(context, this.note.key),
-                    child: Text("add to known"),
-                  ),
-            ElevatedButton(
-              onPressed: () {
-                context.read<Observations>().delete(index);
-                Navigator.pop(context);
-              }, //deleteNote(context, this.note.key),
-              child: Text("delete"),
+            Expanded(
+              flex: 1,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: note.known
+                    ? Text("this is a known observation")
+                    : ElevatedButton(
+                        onPressed: () {
+                          context.read<Observations>().addToKnown(index);
+                        },
+                        //Provider.of<Observations>(context, listen: false)
+                        //   .addToKnown(key), //addToKnown(context, this.note.key),
+                        child: Text("add to known"),
+                      ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    context.read<Observations>().delete(index);
+                    Navigator.pop(context);
+                  }, //deleteNote(context, this.note.key),
+                  child: Text("delete"),
+                ),
+              ),
             )
           ],
         ),
