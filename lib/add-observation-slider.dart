@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:mushies_2/sliding-panel-controller.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-import './observations.dart';
+import 'observations.dart';
+import 'sliding-panel-controller.dart';
 import 'observation-form.dart';
 import 'models/observation.dart';
 import 'get-location.dart';
@@ -90,6 +90,12 @@ class _AddNoteState extends State<AddObservationSlider> {
           },
         );
       }
+    } else {
+      setState(
+        () {
+          _location = value!;
+        },
+      );
     }
   }
 

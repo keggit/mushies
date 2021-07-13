@@ -2,13 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:mushies_2/tools/colors.dart';
-import 'package:mushies_2/observations.dart';
-import 'package:mushies_2/sliding-panel-controller.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'home.dart';
+import 'tools/colors.dart';
+import 'observations.dart';
+import 'sliding-panel-controller.dart';
 import 'models/observation.dart';
 
 void main() async {
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Mushies!',
       theme: ThemeData(
         primaryColor: primaryColor,
         primaryColorLight: primaryLightColor,

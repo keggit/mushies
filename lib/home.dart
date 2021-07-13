@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mushies_2/sliding-panel-controller.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:provider/provider.dart';
 
 import 'add-observation-slider.dart';
 import 'known-view.dart';
 import 'my-observations-view.dart';
+import 'sliding-panel-controller.dart';
 
 //PanelController _pc = new PanelController();
 

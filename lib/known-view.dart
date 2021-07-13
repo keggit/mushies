@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mushies_2/observations.dart';
 import 'package:provider/provider.dart';
 
 import 'observation-sliver.dart';
 import 'models/observation.dart';
+import 'observations.dart';
 
 // this view takes any observations marked 'known'
 // and groups them together based on title

@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
    <application
-        android:label="mushies_2"
+        android:label="Mushies!"
         android:icon="@mipmap/mushies_launcher">
         <activity
             android:name=".MainActivity"
