@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'home.dart';
+import 'models/location.dart';
 import 'tools/colors.dart';
 import 'observations.dart';
 import 'sliding-panel-controller.dart';
@@ -17,7 +18,8 @@ void main() async {
   Directory directory = await getApplicationDocumentsDirectory();
   Hive
     ..init(directory.path)
-    ..registerAdapter(ObservationAdapter());
+    ..registerAdapter(ObservationAdapter())
+    ..registerAdapter(LocationAdapter());
   await Hive.openBox<Observation>('observationsBox');
 
   runApp(

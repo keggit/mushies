@@ -1,53 +1,53 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'observation.dart';
+part of 'location.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ObservationAdapter extends TypeAdapter<Observation> {
+class LocationAdapter extends TypeAdapter<Location> {
   @override
-  final int typeId = 1;
+  final int typeId = 2;
 
   @override
-  Observation read(BinaryReader reader) {
+  Location read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Observation(
-      fields[0] as String,
-      fields[4] as DateTime,
-      summary: fields[1] as String?,
-      gillType: fields[2] as String?,
-      imagePath: fields[3] as String?,
-      known: fields[5] as bool,
-      latitude: fields[6] as double?,
-      location: fields[7] as Location?,
+    return Location(
+      longitude: fields[0] as double,
+      latitude: fields[1] as double,
+      timeStamp: fields[2] as DateTime?,
+      accuracy: fields[3] as double,
+      altitude: fields[4] as double,
+      heading: fields[5] as double,
+      speed: fields[6] as double,
+      speedAccuracy: fields[7] as double,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Observation obj) {
+  void write(BinaryWriter writer, Location obj) {
     writer
       ..writeByte(8)
       ..writeByte(0)
-      ..write(obj.name)
+      ..write(obj.longitude)
       ..writeByte(1)
-      ..write(obj.summary)
-      ..writeByte(2)
-      ..write(obj.gillType)
-      ..writeByte(3)
-      ..write(obj.imagePath)
-      ..writeByte(4)
-      ..write(obj.timeObserved)
-      ..writeByte(5)
-      ..write(obj.known)
-      ..writeByte(6)
       ..write(obj.latitude)
+      ..writeByte(2)
+      ..write(obj.timeStamp)
+      ..writeByte(3)
+      ..write(obj.accuracy)
+      ..writeByte(4)
+      ..write(obj.altitude)
+      ..writeByte(5)
+      ..write(obj.heading)
+      ..writeByte(6)
+      ..write(obj.speed)
       ..writeByte(7)
-      ..write(obj.location);
+      ..write(obj.speedAccuracy);
   }
 
   @override
@@ -56,7 +56,7 @@ class ObservationAdapter extends TypeAdapter<Observation> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ObservationAdapter &&
+      other is LocationAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

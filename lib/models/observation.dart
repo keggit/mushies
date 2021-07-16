@@ -1,5 +1,7 @@
 import 'package:hive/hive.dart';
 
+import 'location.dart';
+
 part 'observation.g.dart';
 
 @HiveType(typeId: 1)
@@ -18,13 +20,16 @@ class Observation {
   bool known = false;
   @HiveField(6)
   double? latitude;
+  @HiveField(7)
+  Location? location;
 
   Observation(this.name, this.timeObserved,
       {this.summary,
       this.gillType,
       this.imagePath,
       this.known = false,
-      this.latitude});
+      this.latitude,
+      this.location});
 
   Map<String, dynamic> toMap() {
     return {

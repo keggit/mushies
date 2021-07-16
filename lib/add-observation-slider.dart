@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:mushies_2/models/location.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -201,7 +202,15 @@ class _AddNoteState extends State<AddObservationSlider> {
                                       DateTime.now(),
                                       image: _image,
                                       known: _known,
-                                      latitude: position.latitude,
+                                      location: Location(
+                                          longitude: position.longitude,
+                                          latitude: position.latitude,
+                                          accuracy: position.accuracy,
+                                          altitude: position.altitude,
+                                          heading: position.heading,
+                                          speed: position.speed,
+                                          speedAccuracy:
+                                              position.speedAccuracy),
                                     );
                               } else {
                                 context.read<Observations>().addNote(

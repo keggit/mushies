@@ -12,9 +12,9 @@ class Observations with ChangeNotifier, DiagnosticableTreeMixin {
 
   get hiveObs => _hiveObs;
 
-  void addNote(name, timeObserved, {image, known, latitude}) async {
+  void addNote(name, timeObserved, {image, known, location}) async {
     final obs = Observation(name, timeObserved,
-        imagePath: image, known: known, latitude: latitude);
+        imagePath: image, known: known, location: location);
 
     _observations.add(
       Observation(name, timeObserved, imagePath: image, known: known),
@@ -22,19 +22,19 @@ class Observations with ChangeNotifier, DiagnosticableTreeMixin {
 
     //var box = Hive.box<Observation>('observationsBox');
     _hiveObs.add(Observation(name, timeObserved,
-        imagePath: image, known: known, latitude: latitude));
+        imagePath: image, known: known, location: location));
 
     print(obs);
 
     notifyListeners();
   }
 
-  void addToKnown(index) async {
+  void switchKnown(index) async {
     final note = _hiveObs.getAt(index);
 
     if (note != null) {
       final observation = Observation(note.name, note.timeObserved,
-          imagePath: note.imagePath, known: true);
+          imagePath: note.imagePath, known: !note.known);
       _hiveObs.putAt(index, observation);
     }
 
