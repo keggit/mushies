@@ -14,22 +14,22 @@ Mushies is still in its pre-alpha development phase. The app allows for taking n
 
 The home screen shows two tabs 'my observations' and 'known mushrooms'. The 'my observations' tab shows a list of all the notes taken and the 'known mushrooms' tab shows a similar list, except the user has selected that the note is something they are sure of
 
-![home](mushies_2/media/home.png)
+![home](media/home.png)
 
 ### Adding an Observation
 
 On the bottom of the home screen is a slider that can be tapped or swiped to bring up the 'add observation' widget. This widget can be dismissed without losing the information already typed and then brought up again. Gps information is stored upon adding the observation
 
-![slider](mushies_2/media/slider.png)
+![slider](media/slider.png)
 
 ## Steps to Alpha Release
 
-    [x] Add observation
-    [ ] Drop a tag command
-    [ ] take an audio-transcribed note
-    [ ] Continuous voice recognition
-    [ ] UI improvements including potentially dropping the 'known tab' for alpha
-    [ ] Export data
+- [x] Add observation
+-  [ ] Drop a tag command
+- [ ] take an audio-transcribed note
+- [ ] Continuous voice recognition
+- [ ] UI improvements including potentially dropping the 'known tab' for alpha
+- [ ] Export data
 
 ## Tools Currently in Use
 
@@ -48,9 +48,9 @@ Follow the [guide](https://flutter.dev/docs/get-started/install) for installing 
 Clone, and run the code with these commands:
 
 ```
-    git clone https://github.com/keggit/mushies.git
-    cd mushies
-    flutter run
+git clone https://github.com/keggit/mushies.git
+cd mushies
+flutter run
 ```
 
 If there is an android device connected, it will automatically run. Otherwise, select web or linux/windows/mac. 
